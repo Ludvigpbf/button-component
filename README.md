@@ -1,127 +1,189 @@
-# npm-pack-template
+# Button Component
 
-An npm package template for building and publishing reusable React component libraries. This template uses CSS-in-JS with Emotion and provides a structured setup with separate files for styles, props, and components.
+A customizable Button component built with React and Emotion.
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Development](#development)
-- [Build](#build)
-- [File Structure](#file-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
 
-To get started, clone the repository:
+Install the package via npm:
 
 ```sh
-git clone https://github.com/Ludvigpbf/npm-pack-template.git
-cd npm-pack-template
-npm install
+npm install your-button-package
+```
+
+You also need to install the peer dependencies:
+
+```sh
+npm install @emotion/react @emotion/styled
 ```
 
 ## Usage
-This template is designed to help you create reusable React components. Follow the steps below to create and export your components.
 
-**Creating a Component**
-1. Create a new component file: Create a new file in the `src/component directory`, e.g., `MyComponent.tsx`.
-
-2. Create a styles file: Create a corresponding styles file in the `src/component` directory, e.g., `MyComponentStyles.ts`.
-
-3. Create a props file: Create a corresponding props file in the `src/component` directory, e.g., `MyComponentProps.ts`.
- 
-4. Define your component: In `MyComponent.tsx`, define your component and import the styles and props.
-
-Example:
+Here's an example of how to use the Button component in your project:
 
 ```ts
 /** @jsxImportSource @emotion/react */
+import React, { useState, useEffect } from "react";
+import Button from "@flyckt-coding/buttons";
 
-import { MyComponentStyles } from "./MyComponentStyles";
-import MyComponentProps from "./MyComponentProps";
+function App() {
+  const [buttonState, setButtonState] = useState<
+    "normal" | "loading" | "success" | "error"
+  >("normal");
 
-const MyComponent: React.FC<MyComponentProps> = ({
-  componentClassName,
-  bgColor = "gray",
-}) => {
+  useEffect(() => {
+    if (buttonState === "loading") {
+      // Simulate a network request
+      setTimeout(() => {
+        setButtonState("success");
+        setTimeout(() => {
+          setButtonState("error");
+        }, 2000);
+      }, 2000);
+    }
+  }, [buttonState]);
+
+  const handleClick = () => {
+    setButtonState("loading");
+  };
+
+  const adaptiveText = {
+    normal: "Click me",
+    loading: "Loading...",
+    success: "Success!",
+    error: "Error!",
+  };
+
   return (
-    <div
-      css={[
-        MyComponentStyles,
-        {
-          backgroundColor: `${bgColor ? bgColor : ""}`
-        },
-      ]}
-      className={componentClassName ? componentClassName : ""}
+    <Button
+      ClassName="custom-button"
+      id="test-button"
+      bgColor="blue"
+      imgPath="/path/to/image.png"
+      imgAlt="Button Image"
+      imgClassName="button-image"
+      icon={<span>🔔</span>}
+      iconPosition="left"
+      variant="primary"
+      size="large"
+      margin="10px"
+      padding="15px"
+      onClick={handleClick}
+      disabled={false}
+      ariaLabel="Test Button"
+      adaptiveText={adaptiveText}
+      buttonState={buttonState}
+      text="Button"
+      fullWidth={true}
+      tabIndex={0}
+      onFocus={() => console.log("Focused")}
+      onBlur={() => console.log("Blurred")}
+      color="white"
+      borderRadius="5px"
+      isRound={false}
+      shadow="2px 2px 4px rgba(0, 0, 0, 0.1)"
+      hoverStyles={{ backgroundColor: "red" }}
+      focusStyles={{ outline: "2px solid blue" }}
+      activeStyles={{ backgroundColor: "green" }}
+      type="button"
+      borderStyle="solid"
     >
-      <p>Hello World</p>
-    </div>
+      Button Content
+    </Button>
   );
-};
+}
 
-export default MyComponent;
+export default App;
 ```
 
-**Exporting the Component**
-1. Export the component: In `src/index.ts`, export your new component.
-Example:
+## Props
 
-```ts
-export { default as MyComponent } from './component/MyComponent';
-```
-
-### Development
-To start the development server, run:
-
-```sh
-npm run dev
-```
-This will start Vite in development mode and watch for changes.
-
-
-### Build
-To build the package for production, run:
-
-```sh
-npm run build
-```
-This will generate the production build in the dist folder
-
-### File Structure
-The project structure is as follows:
-
-```
-npm-pack-template/
-├── dist/                                                  # Build output
-├── node_modules/                                          # Node.js modules
-├── src/                                                   # Source files
-│   ├── assets/                                            # Assets directory
-│   ├── component/                                         # Components directory
-│   │   ├── MyComponent.tsx                                # Example component file
-│   │   ├── MyComponentStyles.ts                           # Example styles file
-│   │   └── MyComponentProps.ts                            # Example props file
-│   ├── development/                                       # Development directory
-│   │   ├── App.css                                        # Generated css for development page
-│   │   ├── App.css.map                                    # Map file for css
-│   │   ├── App.scss                                       # SCSS file for development page
-│   │   ├── App.tsx                                        # Testing file for you component when developing
-│   │   └── main.tsx                                       # Main file for development
-│   ├── index.d.ts                                         # Entry point for components types exports
-│   ├── index.ts                                           # Entry point for component exports
-│   └── vite-env.d.ts                                      # Vites types file  
-├── .eslintrc.js                                           # ESLint configuration
-├── index.html                                             # HTML file for development
-├── [package.json](http://_vscodecontentref_/0)            # NPM package configuration
-├── [tsconfig.json](http://_vscodecontentref_/1)           # TypeScript configuration
-├── [vite.config.ts](http://_vscodecontentref_/2)          # Vite configuration
-└── [README.md](http://_vscodecontentref_/3)               # Project documentation
-```
+The Button component accepts the following props:
+| Prop | Default Value | Description |
+|----------------|----------------------------------------------------------|---------------------------------------------------------------------|
+| `className` | `""` (empty string) | Custom class name for the button |
+| `id` | `undefined` | ID for the button |
+| `bgColor` | `""` (empty string) | Background color for the button |
+| `imgPath` | `undefined` | Image path for the button |
+| `imgAlt` | `undefined` | Image alt text for the button |
+| `imgClassName` | `undefined` | Class name for the image |
+| `icon` | `undefined` | Icon for the button |
+| `iconPosition` | `"left"` if `icon` is provided, otherwise `undefined` | Icon position (left, center, right) |
+| `variant` | `"default"` | Button variant (default, primary, secondary, tertiary, icon, outlined)|
+| `size` | `"medium"` | Button size (small, medium, large) |
+| `margin` | `""` (empty string) | Margin for the button |
+| `padding` | `""` (empty string) | Padding for the button |
+| `onClick` | `() => alert("Button Clicked!")` | Click event handler |
+| `disabled` | `undefined` | Disable the button |
+| `ariaLabel` | `undefined` | ARIA label for the button |
+| `adaptiveText` | `undefined` | Object with text for different button states (normal, loading, success, error) |
+| `buttonState` | `"normal"` | Current state of the button (normal, loading, success, error) |
+| `text` | `"Button"` | Default text of the button |
+| `fullWidth` | `undefined` | Make the button full width |
+| `tabIndex` | `undefined` | Tab index for the button |
+| `onFocus` | `undefined` | Focus event handler |
+| `onBlur` | `undefined` | Blur event handler |
+| `color` | `""` (empty string) | Text color of the button |
+| `borderRadius` | `""` (empty string) | Border radius of the button |
+| `isRound` | `undefined` | Make the button round |
+| `shadow` | `undefined` | Box shadow for the button |
+| `hoverStyles` | `undefined` | Styles to apply on hover |
+| `focusStyles` | `undefined` | Styles to apply on focus |
+| `activeStyles` | `undefined` | Styles to apply on active state |
+| `type` | `"button"` | Button type (button, submit, reset) |
+| `borderStyle` | `undefined` | Border style of the button (solid, dotted, dashed) |
+| `children` | `undefined` | Content to be rendered inside the button |
 
 
-### Contributing
+## Styling
+The default styling applied are:
+| Style Property       | Default Value                                                                 | Description                                                           |
+|----------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| `display`            | `flex`                                                                        | Makes the button use flexbox for layout.                              |
+| `justify-content`    | `center`                                                                      | Centers the content horizontally within the button.                   |
+| `align-items`        | `center`                                                                      | Centers the content vertically within the button.                     |
+| `padding`            | `0.5rem 1rem`                                                                | Default padding for the button (0.5 rem vertically, 1 rem horizontally). |
+| `border-radius`      | `0.5rem`                                                                     | Rounded corners for the button.                                       |
+| `font-size`          | `1rem`                                                                        | Default font size for the button.                                     |
+| `border`             | `1px solid transparent`                                                      | Transparent border, but with 1px spacing.                             |
+| `cursor`             | `pointer`                                                                     | Shows the pointer (hand) when hovering over the button.               |
+| `background-color`   | `gray`                                                                       | Default background color for the button (gray).                       |
+| `color`              | `white`                                                                      | Default text color for the button (white).                            |
+| `border-style`       | `transparent`                                                                | Default border style for the button (transparent).                    |
+| `box-shadow`         | `2px 2px 4px rgba(0, 0, 0, 0.1)`                                            | Default shadow for the button (light shadow).                         |
+| `&:hover`            | `background-color: #f6f6f650`                                                | Background color when hovering (lighter gray).                        |
+| `&:focus`            | `background-color: transparent`                                             | No change on focus, except for default style adjustments.              |
+| `&:active`           | `background-color: #f6f6f650`                                                | Background color when the button is active (temporarily lighter).     |
+| `background-color`   | `gray`                                                                       | For `default` variant, gray background.                               |
+| `border`             | `1px solid transparent`                                                      | For `default` variant, transparent border.                            |
+| `color`              | `white`                                                                      | For `default` variant, white text color.                              |
+| `&:hover`            | `background-color: #f6f6f650`                                                | For all variants on hover (lighter gray).                             |
+| `&:active`           | `background-color: #f6f6f650`                                                | For all variants on active state (lighter gray).                      |
+| `background-color`   | `blue`                                                                       | For `primary` variant, blue background.                               |
+| `border`             | `1px solid blue`                                                             | For `primary` variant, blue border.                                   |
+| `color`              | `white`                                                                      | For `primary` variant, white text color.                              |
+| `background-color`   | `green`                                                                      | For `secondary` variant, green background.                            |
+| `border`             | `1px solid green`                                                            | For `secondary` variant, green border.                                |
+| `color`              | `white`                                                                      | For `secondary` variant, white text color.                            |
+| `background-color`   | `purple`                                                                     | For `tertiary` variant, purple background.                            |
+| `border`             | `1px solid purple`                                                           | For `tertiary` variant, purple border.                                |
+| `color`              | `white`                                                                      | For `tertiary` variant, white text color.                             |
+| `background-color`   | `transparent`                                                                | For `icon` variant, transparent background.                           |
+| `border`             | `none`                                                                       | For `icon` variant, no borders.                                       |
+| `padding`            | `0`                                                                          | For `icon` variant, no padding.                                       |
+| `margin`             | `0`                                                                          | For `icon` variant, no margin.                                        |
+| `border-style`       | `none`                                                                       | For `icon` variant, no border style.                                  |
+
+
+## Contributing
 Contributions are welcome! Please open an issue or submit a pull request.
 
-### License
+## License
+
 This project is licensed under the MIT License.

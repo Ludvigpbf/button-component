@@ -1,11 +1,11 @@
 {
-  "name": "npm-pack-template",
+  "name": "@flyckt-coding/buttons",
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "description": "An npm package template",
+  "description": "A button component for React with Emotion styling and TypeScript",
   "author": {
-    "name": "Your Name"
+    "name": "Ludvig Flyckt, Flyckt Coding"
   },
   "main": "dist/index.umd.js",
   "module": "dist/index.es.js",
@@ -22,9 +22,12 @@
     "README.md"
   ],
   "keywords": [
-    "npm",
-    "package",
-    "template"
+    "button",
+    "component",
+    "Typescript",
+    "React",
+    "Emotion",
+    "Vite"
   ],
   "publishConfig": {
     "access": "public"

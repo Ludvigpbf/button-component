@@ -1,2 +1,2 @@
-export { default as Component } from './component/Component';
+export { default as Component } from "./component/Button";
 // export components here
