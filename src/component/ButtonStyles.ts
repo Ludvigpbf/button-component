@@ -12,6 +12,8 @@ const Styles = {
     font-size: 1rem;
     border 1px solid transparent;
     cursor: pointer;
+    box-sizing: border-box;
+    text-align: center;
   `,
 
   ButtonAnimation: keyframes`
@@ -80,10 +82,20 @@ const Styles = {
   HoverColor: css`
     &:hover {
       background-color: #f6f6f450;
-      }
-    `,
-  
+    }
+  `,
 
+  IconPosition: {
+    left: css`
+      margin-right: 0.5rem;
+    `,
+    center: css`
+      margin: 0;
+    `,
+    right: css`
+      margin-left: 0.5rem;
+    `,
+  },
 };
 
 // Add more styles here

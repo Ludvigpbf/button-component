@@ -24,6 +24,8 @@ type ComponentProps = {
   }; // Adaptive text for the button
   buttonState?: "normal" | "loading" | "success" | "error" ,
   text?: string; // Button text
+  noText?: boolean; // No text button
+  fontSize?: string; // Font size for the button
   fullWidth?: boolean; // Full width button
   tabIndex?: number; // Tab index for the button
   onFocus?: () => void; // OnFocus event for the button
@@ -38,6 +40,7 @@ type ComponentProps = {
   type?: "button" | "submit" | "reset"; // Button type
   [dataAttribute: `data-${string}`]: string | undefined; // Data attributes
   borderStyle?: "solid" | "dotted" | "dashed"; // Border style
+  borderColor?: string; // Border color
   children?: React.ReactNode; // Button children
 };
 

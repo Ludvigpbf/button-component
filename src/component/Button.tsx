@@ -11,7 +11,7 @@ const ComponentName: React.FC<ComponentProps> = ({
   imgAlt,
   imgClassName,
   icon,
-  iconPosition = icon ? "left" : undefined,
+  iconPosition = "left",
   variant = "default",
   size = "medium",
   margin,
@@ -22,6 +22,8 @@ const ComponentName: React.FC<ComponentProps> = ({
   adaptiveText,
   buttonState = "normal",
   text = "Button",
+  noText,
+  fontSize,
   fullWidth,
   tabIndex,
   onFocus,
@@ -36,9 +38,9 @@ const ComponentName: React.FC<ComponentProps> = ({
   type = "button",
   // ...dataAttributes, // Add data attributes
   borderStyle,
+  borderColor,
   children,
 }) => {
-
   const renderAdaptiveText = () => {
     if (adaptiveText) {
       return adaptiveText[buttonState];
@@ -62,11 +64,21 @@ const ComponentName: React.FC<ComponentProps> = ({
           backgroundColor: `${bgColor ? bgColor : ""}`, // Default background color is transparent
           margin: `${margin ? margin : ""}`, // Default margin is 0
           padding: `${padding ? padding : ""}`, // Default padding is 0
-          width: `${fullWidth ? "100%" : ""}`,
+          width: `${isRound ? "auto" : fullWidth ? "100%" : ""}`,
+          height: `${isRound ? "auto" : ""}`,
           borderRadius: `${isRound ? "50%" : borderRadius ? borderRadius : ""}`,
           borderStyle: `${borderStyle ? borderStyle : ""}`,
+          borderColor: `${borderColor ? borderColor : ""}`,
           color: `${color ? color : ""}`,
-          boxShadow: `${shadow ? (typeof shadow === "string" ? shadow : "2px 2px 4px rgba(0, 0, 0, 0.1)") : ""}`,
+          aspectRatio: isRound ? "1" : "auto",
+          fontSize: `${fontSize ? fontSize : ""}`,
+          boxShadow: `${
+            shadow
+              ? typeof shadow === "string"
+                ? shadow
+                : "0px 3px 2px 1px rgba(255, 255, 255, .2)"
+              : ""
+          }`,
           "&:hover": {
             ...hoverStyles,
           },
@@ -89,13 +101,29 @@ const ComponentName: React.FC<ComponentProps> = ({
         <img src={imgPath} alt={imgAlt ?? imgAlt} className={imgClassName} />
       )}
       {/* Render icon left if provided */}
-      {iconPosition === "left" && icon && <span>{icon}</span>}{" "}
+      {(iconPosition === "left" || iconPosition === "center") && icon && (
+        <span
+          css={[
+            Styles.IconPosition[iconPosition], // Dynamically apply the selected icon position style
+          ]}
+        >
+          {icon}
+        </span>
+      )}{" "}
       {/* Render adaptive text if provided */}
-      {renderAdaptiveText()}
+      {!noText && renderAdaptiveText()}
       {/* Render children */}
       {children}
       {/* Render icon right if provided */}
-      {iconPosition === "right" && icon && icon} {/* Render icon if provided */}
+      {iconPosition === "right" && icon && (
+        <span
+          css={[
+            Styles.IconPosition[iconPosition], // Dynamically apply the selected icon position style
+          ]}
+        >
+          {icon}
+        </span>
+      )}{" "}
     </button>
   );
 };

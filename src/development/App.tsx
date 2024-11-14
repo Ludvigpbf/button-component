@@ -31,7 +31,18 @@ function App() {
   }; */
   return (
     <>
-      <Button />
+      <Button
+       
+     
+        borderColor="white"
+        variant="outlined"
+        borderStyle="dashed"
+        
+
+
+        size="small"
+
+      />
     </>
   );
 }
