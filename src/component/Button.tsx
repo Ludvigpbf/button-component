@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import Styles from "./ButtonStyles"; // Import ComponentStyles from ComponentStyles.ts
-import ComponentProps from "./ButtonProps"; // Import ComponentProps from ComponentProps.tsx
+import ButtonProps from "./ButtonProps"; // Import ComponentProps from ComponentProps.tsx
 
-const ComponentName: React.FC<ComponentProps> = ({
+const ButtonComponent: React.FC<ButtonProps> = ({
   className,
   id,
   bgColor,
@@ -128,4 +128,4 @@ const ComponentName: React.FC<ComponentProps> = ({
   );
 };
 
-export default ComponentName;
+export default ButtonComponent;

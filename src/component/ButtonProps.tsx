@@ -1,6 +1,6 @@
 import React from "react";
 
-type ComponentProps = {
+type ButtonProps = {
   className?: string; // Class name for the button
   id?: string; // Id for the button
   bgColor?: string; // Background color for the button
@@ -44,4 +44,4 @@ type ComponentProps = {
   children?: React.ReactNode; // Button children
 };
 
-export default ComponentProps;
+export default ButtonProps;
