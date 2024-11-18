@@ -1,8 +1,8 @@
-import ComponentProps from "./component/ComponentProps";
+import ButtonProps from "./component/ButtonProps";
 // import props here
 
 declare module "@your-library-name" {
-  export function Component(props: ComponentProps): JSX.Element;
+  export function Button(props: ButtonProps): JSX.Element;
   // Add more components here
 
 }

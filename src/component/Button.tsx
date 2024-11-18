@@ -111,7 +111,7 @@ const ComponentName: React.FC<ComponentProps> = ({
         </span>
       )}{" "}
       {/* Render adaptive text if provided */}
-      {!noText && renderAdaptiveText()}
+      {!noText && !children && renderAdaptiveText()}
       {/* Render children */}
       {children}
       {/* Render icon right if provided */}
