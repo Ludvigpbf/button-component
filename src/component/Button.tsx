@@ -36,10 +36,10 @@ const ComponentName: React.FC<ComponentProps> = ({
   focusStyles,
   activeStyles,
   type = "button",
-  // ...dataAttributes, // Add data attributes
   borderStyle,
   borderColor,
   children,
+  ...dataAttributes // Add data attributes
 }) => {
   const renderAdaptiveText = () => {
     if (adaptiveText) {
@@ -94,7 +94,7 @@ const ComponentName: React.FC<ComponentProps> = ({
       onClick={onClick}
       disabled={disabled}
       type={type}
-      //  {...dataAttributes}
+      {...dataAttributes}
     >
       {/* Render image if imgPath is provided */}
       {imgPath && (
