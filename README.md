@@ -5,6 +5,7 @@ A customizable Button component built with React and Emotion.
 ## Table of Contents
 
 - [Installation](#installation)
+- [Examples](#examples)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
@@ -22,6 +23,14 @@ You also need to install the peer dependencies:
 ```sh
 npm install @emotion/react @emotion/styled
 ```
+## Examples
+
+![default button](./src/component/assets/default-button.png)
+![default button](./src/component/assets/outlined-button-icon.png)
+![default button](./src/component/assets/outlined-dashed.png)
+![default button](./src/component/assets/round-delete-shadow-outlined.png)
+
+
 
 ## Usage
 

@@ -32,16 +32,11 @@ function App() {
   return (
     <>
       <Button
-       
-     
-        borderColor="white"
+        icon="❌"
+        iconPosition="right"
         variant="outlined"
-        borderStyle="dashed"
-        
-
-
-        size="small"
-
+        text="DELETE"
+        borderColor="red"
       />
     </>
   );
